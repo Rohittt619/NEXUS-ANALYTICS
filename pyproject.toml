@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nexus-analytics"
+version = "1.0.0"
+description = "Enterprise Customer Intelligence, Churn Causality, CLV & Campaign ROI Optimization Engine"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Rohit", email = "rrathod1101@gmail.com"}
+]
+keywords = [
+    "customer-intelligence",
+    "churn-prediction",
+    "rfm-segmentation",
+    "campaign-roi",
+    "clv-forecasting",
+    "uplift-modeling",
+    "duckdb",
+    "streamlit",
+    "business-analytics"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Point-Of-Sale",
+    "Topic :: Scientific/Engineering :: Information Analysis"
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "duckdb>=0.9.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "scikit-learn>=1.3.0",
+    "rich>=13.0.0",
+    "typer>=0.12.0",
+    "cryptography>=41.0.0",
+    "pyyaml>=6.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.3.0",
+    "pytest-cov>=4.1.0"
+]
+ui = [
+    "streamlit>=1.35.0",
+    "plotly>=5.18.0"
+]
+
+[project.scripts]
+nexus = "nexus.cli.main:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+pythonpath = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311', 'py312']
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I"]
