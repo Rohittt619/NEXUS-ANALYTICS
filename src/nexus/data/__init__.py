@@ -1,9 +1,8 @@
 """
-NEXUS-ANALYTICS Data Engineering Package.
-
-Includes synthetic customer event generator and DuckDB star-schema data warehouse.
+NEXUS-ANALYTICS Data Engineering & SQL Query Package.
 """
 from nexus.data.generator import SyntheticCustomerGenerator
 from nexus.data.warehouse import DataWarehouse
+from nexus.data.queries import AnalyticsQueries
 
-__all__ = ["SyntheticCustomerGenerator", "DataWarehouse"]
+__all__ = ["SyntheticCustomerGenerator", "DataWarehouse", "AnalyticsQueries"]
