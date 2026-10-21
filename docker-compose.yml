@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  nexus-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nexus-analytics:latest
+    container_name: nexus-analytics-cockpit
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - NEXUS_WAREHOUSE__DB_PATH=:memory:
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  nexus-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nexus-analytics:latest
+    container_name: nexus-analytics-pipeline
+    profiles: ["cli"]
+    entrypoint: ["nexus"]
+    command: ["run", "--customers", "500", "--transactions", "2500", "--campaigns", "1500"]
+    environment:
+      - NEXUS_WAREHOUSE__DB_PATH=:memory:
